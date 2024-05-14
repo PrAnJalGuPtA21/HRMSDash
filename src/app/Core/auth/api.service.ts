@@ -10,6 +10,10 @@ export class ApiService {
   constructor(private http : HttpClient) { }
 
   addUser(data:any){
-    return this.http.post<User>('http://localhost:3000/user',data);
+    return this.http.post<User[]>('http://localhost:3000/user',data);
+  }
+
+  login(data : any){
+    return this.http.get<User[]>('http://localhost:3000/user',data);
   }
 }

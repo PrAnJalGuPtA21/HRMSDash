@@ -23,10 +23,9 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    const data = this.registerForm.value
+    const data = this.registerForm.value;
     if (this.registerForm.valid) {
       this.authService.addUser(data).subscribe((data: User) => {
-        console.log(data);
         this.router.navigateByUrl("/auth/login");
       });
     }

@@ -5,6 +5,22 @@
       "name": "rahul",
       "email": "rahul@gmail.com",
       "password": "rahul@1234"
+    },
+    {
+      "id": "4b1f",
+      "name": "rohan",
+      "email": "test@gmail.com",
+      "password": "rohan@12345"
+    },
+    {
+      "id": "b5a4",
+      "email": "test@gmail.com",
+      "password": "rohan@12345"
+    },
+    {
+      "id": "e7de",
+      "email": "test@gmail.com",
+      "password": "rohan@12345"
     }
   ]
 }
