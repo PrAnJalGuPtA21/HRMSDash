@@ -22,24 +22,19 @@ export class LoginComponent {
 
 
   onLogin() {
-    const data = this.loginform.value;
     if (this.loginform.valid) {
-      this.authservice.login(data).subscribe(res => {
+      this.authservice.login().subscribe(res => {
         const user = res.find((data: any) => {
           return data.email === this.loginform.value.email && data.password === this.loginform.value.password
         });
         if (user) {
-          alert('Login Successful');
-          this.loginform.reset();
-          this.router.navigate(['./dash/home'])
+          alert('Login Succesful');
+          this.loginform.reset()
+          this.router.navigate(["/dash/home"])
         } else {
-          alert('user not found')
+          alert("user not found")
         }
-      }, err => {
-        alert("Something went wrong")
       })
-      console.log(this.loginform.value)
-      this.router.navigate(['./dash/home'])
     }
     else {
       alert('Credentials gone wrong')

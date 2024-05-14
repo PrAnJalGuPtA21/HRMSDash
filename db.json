@@ -13,14 +13,16 @@
       "password": "rohan@12345"
     },
     {
-      "id": "b5a4",
-      "email": "test@gmail.com",
-      "password": "rohan@12345"
+      "id": "51a1",
+      "name": "Sam",
+      "email": "sam@gmail.com",
+      "password": "sam@1234"
     },
     {
-      "id": "e7de",
-      "email": "test@gmail.com",
-      "password": "rohan@12345"
+      "id": "9f43",
+      "name": "Peter",
+      "email": "peter@gmail.com",
+      "password": "peter@12345"
     }
   ]
 }

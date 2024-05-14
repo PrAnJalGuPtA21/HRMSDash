@@ -13,7 +13,7 @@ export class ApiService {
     return this.http.post<User[]>('http://localhost:3000/user',data);
   }
 
-  login(data : any){
-    return this.http.get<User[]>('http://localhost:3000/user',data);
+  login(){
+    return this.http.get<User[]>('http://localhost:3000/user');
   }
 }
