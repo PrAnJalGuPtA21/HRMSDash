@@ -1,0 +1,138 @@
+<div class="box ">
+    <div class="container">
+        <div class="buttons-bar flex justify-between">
+            <div class="in flex text-center">
+                <button id="checkInBtn" *ngIf="!checkInTime" (click)="checkIn()" style="background-color: #02c875;"
+                    class="items-center shadow-lg p-2 w-28 flex rounded-2xl h-8 text-white text-xs font-medium text-center justify-center align-middle">
+                    Check-In
+                    <mat-icon class="ml-2">access_time</mat-icon>
+                </button>
+                <button id="checkOutBtn" *ngIf="checkInTime" (click)="checkOut()"
+                    class="items-center shadow-lg p-2 w-28 flex rounded-2xl h-8 text-white text-xs font-medium text-center justify-center align-middle"
+                    style="background-color: #ff4365;">
+                    Check-Out
+                    <mat-icon class="ml-2">access_time</mat-icon>
+                </button>
+                <p id="currentTime" class="flex items-center" style="margin: 2px; margin-left: 8px;">{{ currentTime ?
+                    currentTime + 'hrs' : "00:00:00hrs"
+                    }} </p>
+            </div>
+            <input type="date" class="w-40 text-center rounded-lg h-8 shadow-lg" id="myDate">
+            <button class="w-20 bg-red-500 text-white rounded-lg hover:translate-y-1" (click)="onLogout()">Logout</button>
+        </div>
+        <hr class="my-4">
+        <div class="boxes flex text-start w-56">
+            <div class="box1 bg-white w-56 h-36 rounded-md shadow-lg p-1">
+                <div class="button-week flex justify-center">
+                    <button class="mr-2 h-7 transition duration-150 border-b-2 border-transparent hover:border-blue-500"
+                        (click)="onToday()"><img src="../../../assets/daily.png" class="w-7 "></button>
+                    <button class="ml-3 h-7 transition duration-150 border-b-2 border-transparent hover:border-blue-500"
+                        (click)="onWeek()"><img src="../../../assets/week.png" class="w-7 "></button>
+                </div>
+                <hr>
+                @if (flagToday) {
+                <div class="box-head flex pl-3">
+                    <p class="text-slate-500 text-sm font-medium">Total Time Track</p>
+                </div>
+                <div class="box-content pl-3" style="margin-top: 0px;">
+                    <p class="text-2xl font-bold" style="margin-bottom: 0px;">{{ currentTime || "00:00:00" }}</p>
+                    <p class="text-sm">{{Today | date : 'd MMMM y' }}</p>
+                </div>
+                <div class="prog " style="margin-left: 9px ; margin-right:9px;">
+                    <!-- <p class="text-xs flex justify-between">9AM
+                        <span class="pr-2">9PM</span>
+                    </p> -->
+                    <div class="w-48 bg-gray-200 rounded-full h-1.5">
+                        <div class="bg-orange-600 h-1.5 rounded-full dark:bg-orange-500"
+                            [style.width.%]="progress <= 100 ? progress : 0">
+                        </div>
+                    </div>
+                </div> }
+                @else if (flagWeek) {
+                <div class="container-week overflow-y-scroll h-24 mr-1">
+                    @for (item of weekDays; track $index) {
+                    <div class="cont-day flex pl-2 m-1 items-center mt-3">
+                        <p class="text-sm align-middle pr-2 w-10">{{item}}</p>
+                        <p class="text-sm pl-1 align-middle ">date</p>
+                        <p class="text-sm pl-3">CheckIn</p>
+                        <p class="text-sm pl-3">CheckOut</p>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="box1 bg-white w-56 h-36 rounded-md pt-3 ml-3 shadow-lg p-3">
+                <div class="box-head flex pl-3">
+                    <p class="text-slate-500 text-sm font-medium items-center flex">Total Time Track</p>
+                </div>
+                <div class="box-content pl-3">
+                    <p class="text-2xl font-bold">{{Today | date:'shortTime'}}</p>
+                    <p class="text-sm">{{Today | date : 'd MMMM y' }}</p>
+                </div>
+                <div class="prog pl-3">
+                    <div class="w-48 bg-gray-300 rounded-full h-1.5 mt-2">
+                        <div class="bg-orange-600 h-1.5 rounded-full dark:bg-orange-500" style="width:45%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box1 bg-white w-56 h-36 rounded-md pt-3 ml-3 shadow-lg p-3">
+                <div class="box-head flex pl-3">
+                    <p class="text-slate-500 text-sm font-medium items-center flex">Total Time Track</p>
+                </div>
+                <div class="box-content pl-3">
+                    <p class="text-2xl font-bold">{{Today | date:'shortTime'}}</p>
+                    <p class="text-sm">{{Today | date : 'd MMMM y' }}</p>
+                </div>
+                <div class="prog pl-3">
+                    <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2">
+                        <div class="bg-orange-600 h-1.5 rounded-full dark:bg-orange-500" style="width: 45%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="screen  bg-white rounded-md h-44 mt-5 shadow-lg">
+            <div class="head flex justify-between">
+                <h1 class="m-1 pt-2 pl-2 font-medium text-slate-600">Recent Screencasts</h1>
+                <div class="head1 flex justify-between items-center">
+                    <input type="date" class="h-6 items-center mt-2 mr-4 bg-slate-300 rounded-lg p-3">
+                    <div class="dropdown">
+                        <button
+                            class="flex justify-center items-center w-20 hover:cursor-pointer h-6 mt-3 border-2 rounded-md mr-2 border-gray-400">Actions</button>
+                        <div class="dropdown-content">
+                            <p class="text-start m-2 hover:cursor-pointer hover:bg-slate-200 p-2 rounded-lg hover:scale-90"
+                                (click)="startRecording()">Start Record</p>
+                            <p class="text-start m-2 hover:cursor-pointer hover:bg-slate-200 p-2 rounded-lg hover:scale-90"
+                                (click)="stopRecording()">Stop Record</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screenshot h-28 flex p-2">
+                <div class="screen w-32 h-20 bg-slate-200 relative  m-1 shadow-md">
+                    <div class="tick absolute"><img ALT="d"></div>
+                </div>
+                <div class="screen w-32 h-20 bg-slate-200 relative  m-1 shadow-md">
+                    <div class="tick absolute"><img ALT="d"></div>
+                </div>
+                <div class="screen w-32 h-20 bg-slate-200 relative  m-1 shadow-md">
+                    <div class="tick absolute"><img ALT="d"></div>
+                </div>
+                <div class="screen w-32 h-20 bg-slate-200 relative  m-1 shadow-md">
+                    <div class="tick absolute"><img ALT="d"></div>
+                </div>
+                <div class="screen w-32 h-20 bg-slate-200 relative  m-1 shadow-md">
+                    <div class="tick absolute"><img ALT="d"></div>
+                </div>
+                <div class="screen w-32 h-20 bg-slate-200 relative  m-1 shadow-md">
+                    <div class="tick absolute"><img ALT="d"></div>
+                </div>
+            </div>
+            <hr style="margin-left: 7px; margin-right: 7px;">
+        </div>
+        <div class="bg-white rounded-md h-36 mt-6 p-3 shadow-lg">
+            <div class="chart pl-3 bg-slate-200 h-32 shadow-md">
+                chart here
+            </div>
+        </div>
+    </div>
+</div>

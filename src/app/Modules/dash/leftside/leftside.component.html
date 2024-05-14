@@ -1,0 +1,32 @@
+<div class="container w-56 text-white h-screen text-center ">
+    <p routerLink="/dash/home" class="text-xl pt-10 text-white hover:cursor-pointer"> <mat-icon class="icon mr-2">timer</mat-icon>Time Track</p>
+    <hr class="m-3">
+    <div routerLink="/dash/home" class="hovering m-2 flex p-2 hover:cursor-pointer rounded-md h-14 justify-start ">
+        <mat-icon>dashboard</mat-icon>
+        <p class="text-md pl-2 flex items-center">Dashboard</p>
+    </div>
+    <div class="hovering m-2 flex p-2 rounded-md h-14 justify-start">
+        <mat-icon>access_time</mat-icon>
+        <p class="text-md pl-2 flex items-center">Time Track</p>
+    </div>
+    <div  routerLink="/dash/report"  class="hovering m-2 flex p-2 hover:cursor-pointer rounded-md h-14 justify-start">
+        <mat-icon>event_note</mat-icon>
+        <p class="text-md pl-2 flex items-center ">Report</p>
+    </div>
+    <div class="hovering m-2 flex p-2 rounded-md h-14 justify-start">
+        <mat-icon>settings</mat-icon>
+        <p class="text-md pl-2 flex items-center">Manage</p>
+    </div>
+    <div class="hovering m-2 flex p-2 rounded-md h-14 justify-start">
+        <mat-icon>settings</mat-icon>
+        <p class="text-md pl-2 flex items-center">Profile & Settings</p>
+    </div>
+    <div class="flex justify-center ">
+        <div class="trial h-28 m-3 rounded-lg mt-16 w-56 shadow-xl" style="background-color: #476577;">
+            <p class="text-md text-white ">Free Trial of 7 days</p>
+            <p class="text-xs text-white mt-2">Switch the paid plan for the software</p>
+            <button class="text-white text-xs w-32 rounded-lg mt-1 h-6" style="background-color: #f68025;">Upgrade</button>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

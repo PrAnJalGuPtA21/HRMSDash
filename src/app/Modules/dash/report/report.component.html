@@ -1,0 +1,146 @@
+<div class="bg-slate-200 h-screen flex ">
+    <div>
+        <app-leftside></app-leftside>
+    </div>
+    <div class="flex-col w-screen h-36">
+        <div class=" h-full flex items-center justify-center" style="background-color: #344f5f;">
+            <p> Start Date ----- End Date </p>
+            <div class="button-cal flex justify-center w-40 ml-20">
+                <button (click)="onweek()"><img src="../../../assets/week.png"
+                        class="w-8 hover:cursor-pointer mr-4"></button>
+                <button (click)="onmonth()"><img src="../../../assets/daily.png"
+                        class="w-8 hover:cursor-pointer"></button>
+            </div>
+        </div>
+        <div class="items-center m-2 bg-slate-300 flex-col">
+            @if (isweek) {
+            <div class="flex justify-evenly text-start pt-2 mb-2">
+                <p class="w-28">Day</p>
+                <p class="w-28">Date</p>
+                <p class="w-28">CheckIn</p>
+                <p class="w-28">Status</p>
+                <p class="w-28">CheckOut</p>
+                <p class="w-28">Total Hrs.</p>
+            </div>
+            @for (item of weekDays; track $index) {
+            <div class="flex justify-evenly text-start p-3">
+                <p class="w-28">{{item}}</p>
+                <p class="w-28">25/Mar/2024</p>
+                <p class="w-28">09:00</p>
+                <p class="w-28">Done</p>
+                <p class="w-28">18:00</p>
+                <p class="w-28">9 Hrs</p>
+            </div>}}
+            @else {
+            <!-- <div class="flex justify-evenly text-start">
+                <p class="w-28">Monday</p>
+                <p class="w-28">26/Mar/2024</p>
+                <p class="w-28">10:00</p>
+                <p class="w-28">not</p>
+                <p class="w-28">11:00</p>
+                <p class="w-28">1 Hrs</p>
+            </div> -->
+            <div class="calender ">
+                <full-calendar [options]="calendarOptions" class="h-96"></full-calendar>
+            </div>
+            }
+        </div>
+        <div class="report m-2 w-auto h-auto mt-5 text-white"  style="background-color: #344f5f;">
+            <p class="text-lg p-6 m-2 rounded-2xl text-center" style="background-color: #476577;">  Attendance Report </p>
+            <div class="reportw_week_month flex">
+                <div class="rep flex-col m-4 w-28 text-center">
+                    <p class="reporting days p-3 hover:cursor-pointer  rounded-xl" (click)="onDays()">
+                        Days
+                    </p>
+                    <p class="reporting hours p-3 hover:cursor-pointer  rounded-xl" (click)="onHours()">
+                        Hours
+                    </p>
+                </div>
+                <div class="content m-4 flex-col w-full ">
+                    @if (isdays) {
+                    <div class="daycont flex rounded-2xl text-sm" style="background-color: #476577;">
+                        <div class="days p-3 ml-4 mr-3 flex-col">
+                            <p>Payable Days</p>
+                            <span>3 Days</span>
+                        </div>
+                        <div class="days p-3 ml-2 mr-3 flex-col">
+                            <p>Present</p>
+                            <span>1 Days</span>
+                        </div>
+                        <div class="days p-3 ml-2 mr-3 flex-col">
+                            <p>On Duty</p>
+                            <span>0 Days</span>
+                        </div>
+                        <div class="days p-3 ml-2 mr-3 flex-col">
+                            <p>Paid Leaves</p>
+                            <span>0 Days</span>
+                        </div>
+                        <div class="days p-3 ml-2 mr-3 flex-col">
+                            <p>Holidays</p>
+                            <span>0 Days</span>
+                        </div>
+                        <div class="days p-3 ml-2 mr-3 flex-col">
+                            <p>Weekend</p>
+                            <span>2 Days</span>
+                        </div>
+                        <div class="days p-3 ml-2 mr-3 flex-col">
+                            <p>Absent</p>
+                            <span>0 Days</span>
+                        </div>
+                        <div class="days p-3 ml-2 mr-3 flex-col">
+                            <p>Unpaid Leaves</p>
+                            <span>0 Days</span>
+                        </div>
+                    </div>
+                    }
+                    @else if(ishours){
+                    <div class="daycont flex mt-10  rounded-2xl text-xs " style="background-color: #476577;">
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Total Hours</p>
+                            <span>9 :00 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Payable Hours</p>
+                            <span>9 :00 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Present Hours</p>
+                            <span>9 :00 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>On Duty</p>
+                            <span>0:00 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Paid Leaves</p>
+                            <span>0:00 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Holidays</p>
+                            <span>2:00 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Weekends</p>
+                            <span>16:00 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Unpaid Leaves</p>
+                            <span>0:00 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Over Time</p>
+                            <span>1:05 Hrs</span>
+                        </div>
+                        <div class="days p-3 ml-1 mr-1 flex-col">
+                            <p>Deviation Time</p>
+                            <span>0:00 Hrs</span>
+                        </div>
+                    </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
