@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(private router: Router) { }
   signupbtn() {
-    this.router.navigateByUrl('/auth/register');
+    this.router.navigate(['./auth/register']);
   }
 
   loginform = new FormGroup({
