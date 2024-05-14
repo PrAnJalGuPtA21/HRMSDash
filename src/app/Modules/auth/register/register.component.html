@@ -1,7 +1,7 @@
 <div class="container">
     <div class="forms-container">
         <div class="signin-signup">
-            <form (ngSubmit)="onSubmit()" class="sign-in-form" [formGroup]="registerform" autocomplete="off">
+            <form (ngSubmit)="onSubmit()" class="sign-in-form" [formGroup]="registerForm" autocomplete="off">
                 <h2 class="title font-bold">Sign up</h2>
                 <div class="input-field">
                     <div class="icon flex items-center justify-center">
@@ -41,7 +41,7 @@
                     Thank you for being part of our community. Your presence enriches our
                     shared experiences. Let's continue this journey together!
                 </p>
-                <button class="btn transparent shadow-md shadow-slate-100" (click)="signinbtn()">
+                <button class="btn transparent shadow-md shadow-slate-100" (click)="signIn()">
                     Sign in
                 </button>
             </div>
