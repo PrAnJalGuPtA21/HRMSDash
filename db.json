@@ -1,0 +1,28 @@
+{
+  "user": [
+    {
+      "id": "0a1e",
+      "name": "rahul",
+      "email": "rahul@gmail.com",
+      "password": "rahul@1234"
+    },
+    {
+      "id": "51a1",
+      "name": "Sam",
+      "email": "sam@gmail.com",
+      "password": "sam@1234"
+    },
+    {
+      "id": "9f43",
+      "name": "Peter",
+      "email": "peter@gmail.com",
+      "password": "peter@12345"
+    }
+  ],
+  "checkIn": [
+    
+  ],
+  "checkOut": [
+    
+  ]
+}
