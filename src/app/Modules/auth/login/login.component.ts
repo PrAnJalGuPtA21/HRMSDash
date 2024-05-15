@@ -14,7 +14,6 @@ export class LoginComponent {
   signupbtn() {
     this.router.navigate(['./auth/register']);
   }
-
   loginform = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
@@ -25,10 +24,11 @@ export class LoginComponent {
     if (this.loginform.valid) {
       this.authservice.login().subscribe(res => {
         const user = res.find((data: any) => {
-          return data.email === this.loginform.value.email && data.password === this.loginform.value.password
+          return data.email === this.loginform.value.email && data.password === this.loginform.value.password;
         });
         if (user) {
           alert('Login Succesful');
+          localStorage.setItem('userDetails' , JSON.stringify(user))
           this.loginform.reset()
           this.router.navigate(["/dash/home"])
         } else {

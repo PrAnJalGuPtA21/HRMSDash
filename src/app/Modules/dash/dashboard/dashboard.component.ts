@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TimeService } from '../../../Core/master/time.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -98,13 +99,13 @@ export class DashboardComponent {
     }
   }
 
-  onLogout(){
+  onLogout() {
     localStorage.clear();
     this.router.navigate(['/auth/login'])
   }
 
 
-  constructor(public datepipe: DatePipe , private router :Router ) { }
+  constructor(public datepipe: DatePipe, private router: Router, private time: TimeService) { }
 
   Today: Date = new Date();
   currentTime: string = '';
@@ -119,7 +120,6 @@ export class DashboardComponent {
   progress: number = 0;
   totalprogress: number = 0;
   totalTime: number = 0;
-  informattedTime: any = null;
   outformattedTime: any = null;
 
 
@@ -141,9 +141,14 @@ export class DashboardComponent {
   checkIn(): void {
     if (!this.checkInTime) {
       this.checkInTime = new Date();
-      this.informattedTime = this.datepipe.transform(this.checkInTime, 'HH:mm:ss');
-      console.log('IN Formatted Time:', this.informattedTime);
-      localStorage.setItem('checkInTime', this.checkInTime.toJSON()); //extra
+      const itime = this.datepipe.transform(this.checkInTime, 'HH:mm:ss') || '';
+      const day = this.datepipe.transform(this.checkInTime, 'EEEE') || '';
+      const date = this.datepipe.transform(this.checkInTime, 'yyyy-MM-dd') || '';
+      this.time.checkInTime({
+        day, date,
+        checkInTime: itime,
+      }).subscribe();
+      localStorage.setItem('checkInTime', this.checkInTime.toJSON());
     }
     this.updateTime();
     this.timer = setInterval(() => this.updateTime(), 1000);
@@ -180,7 +185,13 @@ export class DashboardComponent {
     this.checkOutTime = new Date();
     this.outformattedTime = this.datepipe.transform(this.checkOutTime, 'HH:mm:ss');
     console.log('OUT Formatted Time:', this.outformattedTime);
-    if (this.checkInTime) {
+    const otime = this.datepipe.transform(this.checkInTime, 'HH:mm:ss') || '';
+    const day = this.datepipe.transform(this.checkInTime, 'EEEE') || '';
+    const date = this.datepipe.transform(this.checkInTime, 'yyyy-MM-dd') || '';
+    this.time.checkOutTime({
+      day, date,
+      checkOutTime: otime,
+    }).subscribe(); if (this.checkInTime) {
       const diffSeconds = Math.floor((this.checkOutTime.getTime() - this.checkInTime.getTime()) / 1000);
       this.remainingTime += diffSeconds;
       this.diffMinutes = diffSeconds / 60;

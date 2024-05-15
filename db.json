@@ -7,12 +7,6 @@
       "password": "rahul@1234"
     },
     {
-      "id": "4b1f",
-      "name": "rohan",
-      "email": "test@gmail.com",
-      "password": "rohan@12345"
-    },
-    {
       "id": "51a1",
       "name": "Sam",
       "email": "sam@gmail.com",
@@ -24,5 +18,11 @@
       "email": "peter@gmail.com",
       "password": "peter@12345"
     }
+  ],
+  "checkIn": [
+    
+  ],
+  "checkOut": [
+    
   ]
 }
