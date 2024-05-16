@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../../Core/auth/api.service';
-import { find } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-login',
@@ -19,16 +19,20 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   })
 
-
   onLogin() {
     if (this.loginform.valid) {
       this.authservice.login().subscribe(res => {
         const user = res.find((data: any) => {
-          return data.email === this.loginform.value.email && data.password === this.loginform.value.password;
+          if (data.email === this.loginform.value.email && data.password === this.loginform.value.password) {
+            return true;
+          }
+          else {
+            return false;
+          }
         });
         if (user) {
           alert('Login Succesful');
-          localStorage.setItem('userDetails' , JSON.stringify(user))
+          localStorage.setItem('userDetails', JSON.stringify(user))
           this.loginform.reset()
           this.router.navigate(["/dash/home"])
         } else {

@@ -2,12 +2,14 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TimeService } from '../../../Core/master/time.service';
+import { Time } from '../../../Core/Interfaces/Time.interface';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
+
 export class DashboardComponent {
   stream: MediaStream | null = null;
   mixedStream: MediaStream | null = null;
@@ -120,12 +122,10 @@ export class DashboardComponent {
   progress: number = 0;
   totalprogress: number = 0;
   totalTime: number = 0;
-  outformattedTime: any = null;
-
-
   checkInBtnDisabled: boolean = false;
   checkOutBtnDisabled: boolean = true;
-
+  flagIn: boolean = false;
+  flagOut: boolean = false;
   ngOnInit() {
     const storedCheckInTime = localStorage.getItem('checkInTime');
     if (storedCheckInTime) {
@@ -136,18 +136,18 @@ export class DashboardComponent {
       this.checkOutBtnDisabled = false;
     }
   }
-
+  itime: string = ''
+  iday: string = ''
+  idate: string = ''
   gettime: Date | null = null;
   checkIn(): void {
+    this.flagIn = true;
     if (!this.checkInTime) {
       this.checkInTime = new Date();
-      const itime = this.datepipe.transform(this.checkInTime, 'HH:mm:ss') || '';
-      const day = this.datepipe.transform(this.checkInTime, 'EEEE') || '';
-      const date = this.datepipe.transform(this.checkInTime, 'yyyy-MM-dd') || '';
-      this.time.checkInTime({
-        day, date,
-        checkInTime: itime,
-      }).subscribe();
+      this.itime = this.datepipe.transform(this.checkInTime, 'HH:mm:ss') || '';
+      this.iday = this.datepipe.transform(this.checkInTime, 'EEEE') || '';
+      this.idate = this.datepipe.transform(this.checkInTime, 'yyyy-MM-dd') || '';
+      // console.log(this.idate)
       localStorage.setItem('checkInTime', this.checkInTime.toJSON());
     }
     this.updateTime();
@@ -180,18 +180,19 @@ export class DashboardComponent {
     return hours + ":" + minutes + ":" + remainingSeconds;
   }
 
+  otime: string = ''
+  oday: string = ''
+  odate: string = ''
   checkOut(): void {
+    this.flagOut = true;
     clearInterval(this.timer);
     this.checkOutTime = new Date();
-    this.outformattedTime = this.datepipe.transform(this.checkOutTime, 'HH:mm:ss');
-    console.log('OUT Formatted Time:', this.outformattedTime);
-    const otime = this.datepipe.transform(this.checkInTime, 'HH:mm:ss') || '';
-    const day = this.datepipe.transform(this.checkInTime, 'EEEE') || '';
-    const date = this.datepipe.transform(this.checkInTime, 'yyyy-MM-dd') || '';
-    this.time.checkOutTime({
-      day, date,
-      checkOutTime: otime,
-    }).subscribe(); if (this.checkInTime) {
+    this.otime = this.datepipe.transform(this.checkOutTime, 'HH:mm:ss') || '';
+    this.oday = this.datepipe.transform(this.checkOutTime, 'EEEE') || '';
+    this.odate = this.datepipe.transform(this.checkOutTime, 'yyyy-MM-dd') || '';
+    // console.log(this.odate)
+    this.timeCheck(this.iday, this.idate, this.itime, this.odate, this.oday, this.otime);
+    if (this.checkInTime) {
       const diffSeconds = Math.floor((this.checkOutTime.getTime() - this.checkInTime.getTime()) / 1000);
       this.remainingTime += diffSeconds;
       this.diffMinutes = diffSeconds / 60;
@@ -217,5 +218,23 @@ export class DashboardComponent {
   onWeek() {
     this.flagToday = false;
     this.flagWeek = true;
+  }
+
+  checkInAr: string[] = []
+  checkOutAr: string[] = []
+  timeCheck(iday: string, idate: string, itime: string, oday: string, odate: string, otime: string) {
+    const day = iday;
+    const date = idate;
+    const data: Time = { day, date, Status: { checkIn: this.checkInAr, checkOut: this.checkOutAr } };
+    if (this.idate === this.odate &&  localStorage.getItem('userDetails')) {
+      data.Status.checkIn.push(itime);
+      data.Status.checkOut.push(otime);
+    }
+    else {
+      alert("error")
+    }
+    this.time.timeConsole(data).subscribe(res => {
+      console.log(res);
+    });
   }
 }
