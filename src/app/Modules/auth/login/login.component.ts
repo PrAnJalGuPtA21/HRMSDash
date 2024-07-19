@@ -22,7 +22,7 @@ export class LoginComponent {
   onLogin() {
     if (this.loginform.valid) {
      alert(' Good to go !')
-      this.router.navigate(['./dash'])
+      this.router.navigate(['/dash/home'])
     }
     else {
       alert('Credentials gone wrong')
