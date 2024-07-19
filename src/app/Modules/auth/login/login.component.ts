@@ -21,24 +21,7 @@ export class LoginComponent {
 
   onLogin() {
     if (this.loginform.valid) {
-      this.authservice.login().subscribe(res => {
-        const user = res.find((data: any) => {
-          if (data.email === this.loginform.value.email && data.password === this.loginform.value.password) {
-            return true;
-          }
-          else {
-            return false;
-          }
-        });
-        if (user) {
-          alert('Login Succesful');
-          localStorage.setItem('userDetails', JSON.stringify(user))
-          this.loginform.reset()
-          this.router.navigate(["/dash/home"])
-        } else {
-          alert("user not found")
-        }
-      })
+     alert(' Good to go !')
     }
     else {
       alert('Credentials gone wrong')
