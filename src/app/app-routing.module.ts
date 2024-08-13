@@ -14,7 +14,6 @@ const routes: Routes = [
   },
   {
     path:'dash',
-    canActivate:[guardGuard],
     loadChildren:()=>import('./Modules/dash/dash.module').then(m => m.DashModule)
   }
 ];
