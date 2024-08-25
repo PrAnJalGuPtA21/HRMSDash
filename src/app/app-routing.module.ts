@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { guardGuard } from './Core/Guard/guard.guard';
 
 const routes: Routes = [
   {
